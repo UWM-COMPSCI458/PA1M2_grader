@@ -18,8 +18,8 @@ function test_asm() {
   cp "$1.asm" curtest.asm
   $(./$SUBMISSION curtest.asm)
 
-  cp "$1.text" "curtest.text"
-  cp "$1.data" "curtest.data"
+  # cp "$1.text" "curtest.text"
+  # cp "$1.data" "curtest.data"
   
   if [ ! -f "curtest.text" ]; then
     echo "> [!WARNING]"
@@ -35,7 +35,7 @@ function test_asm() {
   fi
 
   if [ "$SCORE" -eq 0 ]; then
-    echo "**Score for $1: 0 / $MAX_SCORE**"
+    echo "**Score for $1: 0 / $MAX_SCORE ❌**"
     echo "********"
     echo
     rm curtest.*
@@ -87,9 +87,15 @@ function test_asm() {
   fi
 
   echo
-  echo "**Score for $1: $SCORE / $MAX_SCORE**"
+  
+  if [ "$SCORE" -eq 0 ]; then
+    echo "**Score for $1: 0 / $MAX_SCORE ❌**"
+  else
+    echo "**Score for $1: $SCORE / $MAX_SCORE ✅**"
+  fi
   echo "********"
   echo
+
 
   ((TOTAL_SCORE+=SCORE))
 
